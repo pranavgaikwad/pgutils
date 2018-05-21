@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Author : Pranav Gaikwad
+# Description : Calls What's My Ip api to get public Ip address of the device, waits for idletime to follow usage limits
+
+# 
+now=`date +"%s"`
+# 
+stampfile=".lasttimestamp"
+# 
+outputfile=".ip"
+
+url="https://ipv4bot.whatismyipaddress.com/"
+
+# custom user agent string
+user_agent_string="Pranav Gaikwad Bot 1.0"
+
+# custom User-Agent header for CURL
+user_agent_header="User-Agent: ""$user_agent_string"
+
+# time in seconds for which program 
+# will stop before making next request
+idletime=300
+# checks if call is applicable
+callapplicable=false
+
+# create new stamp file if not exists
+if [ ! -f ${stampfile} ]; then
+   touch ${stampfile}
+   initialtime=$((now-idletime))
+   echo ${initialtime} > ${stampfile}
+fi
+
+# create new output file if not exists
+if [ ! -f ${outputfile} ]; then
+   touch ${outputfile}
+fi
+
+# read last time stamp
+lastexecutionstamp=`cat ${stampfile}`
+
+# get delta
+difference=$((now-lastexecutionstamp))
+
+# checks whether idletime is completed, sets
+# the variable 'callapplicable' if completed
+if [ ${difference} -ge ${idletime} ];then
+    callapplicable=true
+fi
+
+if ${callapplicable}; then
+	output=`curl -XGET ${url} -H "${user_agent_header}" -s 2>/dev/null`
+	# save output for reuse
+	echo ${output} > ${outputfile}
+	# write to file a new timestamp 
+	echo ${now} > ${stampfile}
+	echo ${output}
+else 
+	# reuse saved output
+	cat ${outputfile}
+fi
