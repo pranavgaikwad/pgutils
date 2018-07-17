@@ -1,0 +1,40 @@
+#!/bin/bash
+
+last_temperature=~/.redshifter.tmp
+
+if [ ! -f ${last_temperature} ]; then
+    touch ${last_temperature}
+    echo 2500 > ${last_temperature}
+fi
+
+last_correction=`cat ${last_temperature}`
+
+lower_limit=1000
+higher_limit=25000
+
+option='inc' # to reduce or increase the hue
+
+# parse option from CLI params
+if [ $1 == '+' ]; then
+    option='+'
+else 
+    option='-'
+fi 
+
+hue_step=100 # + / - by this value
+
+new_correction=`expr $last_correction ${option} ${hue_step}`
+
+if (( new_correction < lower_limit )); then
+    new_correction=2500
+elif (( new_correction > higher_limit )); then
+    new_correction=25000
+fi
+
+redshift -O ${new_correction} > /dev/null 2>&1
+
+echo ${new_correction} > ${last_temperature}
+
+echo "Setting hue to ${new_correction}"
+
+
