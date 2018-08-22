@@ -42,8 +42,8 @@ lastexecutionstamp=`cat ${stampfile}`
 # get delta
 difference=$((now-lastexecutionstamp))
 
-# checks whether idletime is completed, sets
-# the variable 'callapplicable' if completed
+# checks whether idletime is completed,
+# sets 'callapplicable' if completed
 if [ ${difference} -ge ${idletime} ];then
     callapplicable=true
 fi
