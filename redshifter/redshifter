@@ -15,10 +15,10 @@ higher_limit=25000
 option='inc' # to reduce or increase the hue
 
 # parse option from CLI params
-if [ $1 == '+' ]; then
-    option='+'
-else 
+if [ $1 == '-' ]; then
     option='-'
+else 
+    option='+'
 fi 
 
 hue_step=100 # + / - by this value
@@ -26,9 +26,9 @@ hue_step=100 # + / - by this value
 new_correction=`expr $last_correction ${option} ${hue_step}`
 
 if (( new_correction < lower_limit )); then
-    new_correction=2500
+    new_correction=${lower_limit}
 elif (( new_correction > higher_limit )); then
-    new_correction=25000
+    new_correction=${higher_limit}
 fi
 
 redshift -O ${new_correction} > /dev/null 2>&1
