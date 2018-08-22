@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $1 == '+' ]; then
+    option='+'
+else 
+    option='-'
+fi
+
+echo "pactl set-sync-volume 0 ${option}10%"
+
+pactl set-sync-volume 0 ${option}10%

@@ -13,7 +13,7 @@ However, in most cases, I like to control temperature myself. To do that, Redshi
 
 Redshifter makes use of this command and lets you increment / decrement the values by certain factor. Redshifter could be configured to be executed with custom keyboard shortcut to allow you to change temperature the same way you change screen brightness. 
 
-#### Options
+### Options
 
 Increase blue hue on screen using
 
@@ -23,3 +23,6 @@ Decreases blue hue on screen using
 
 `redshifter -`
 
+### Custom keyboard shortcuts example
+
+![Custom Keyboard Shortcut for redshifter](./screenshot.png)
