@@ -2,7 +2,7 @@
 
 Redshifter is a simple script that you can use to adjust the color temperature of your desktop.  
 
-It makes use of [Redshift](https://github.com/jonls/redshift) which is a popular tool. 
+It makes use of [Redshift](https://github.com/jonls/redshift), a popular open source program.
 
 
 ### What makes this tool different from redshift ?
