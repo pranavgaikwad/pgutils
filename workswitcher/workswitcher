@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Author : Pranav Gaikwad
+# This program switches your workspace right or left, 
+# based on given input. Inputs - l / r 
+
+# by default, switched to right
+operation="+"
+
+# first parameter can change the switch value to left 
+if [ "$1" == "l" ]; then
+    operation="-"
+fi  
+
+# get current workspace
+current_workspace=$(wmctrl -d | grep "*" | cut -c 1)
+
+# count total workspaces
+total_workspaces=$(wmctrl -d | wc -l)
+
+# calculate new workspace based on operation specified
+let new_workspace="($current_workspace $operation 1) % total_workspaces"
+
+# use wmctrl to actually switch the workspace
+wmctrl -s $new_workspace 
