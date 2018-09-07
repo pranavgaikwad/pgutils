@@ -19,7 +19,7 @@ current_workspace=$(wmctrl -d | grep "*" | cut -c 1)
 total_workspaces=$(wmctrl -d | wc -l)
 
 # calculate new workspace based on operation specified
-let new_workspace="($current_workspace $operation 1) % total_workspaces"
+let new_workspace="((($current_workspace $operation 1) % total_workspaces) + total_workspaces) % total_workspaces"
 
 # use wmctrl to actually switch the workspace
 wmctrl -s $new_workspace 
