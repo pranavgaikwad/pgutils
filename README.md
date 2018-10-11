@@ -2,7 +2,7 @@
 
 This repository is a collection of productivity tools which I commonly use.  
 
-Some of these tools are just plain Shell scripts, while some complicated scripts are written in Python.
+Some of these tools are just plain Shell scripts, while some scripts are written in Python.
 
 Each tool has it's own directory. 
 
